@@ -10,12 +10,25 @@ class ServerMgr(object):
         self.proc = None
         
     def start_server(self):
-        self.log("Starting web server")
-        cmd = "python " + PATH.JADE_SERVER_MODULE
-        subprocess.run("python", PATH.JADE_SERVER_MODULE)
+        if self.proc == None:
+            self.log("Starting web server")
+            self.proc = subprocess.Popen(["python", PATH.JADE_SERVER_MODULE])
+        else:
+            self.log("Web server should already be started")
+            
+    def log_status(self):
+        if self.proc == None:
+            self.log("Server not started")
+        else:
+            self.log("Not sure what's going on TODO")
         
-        pass
-
     def stop_server(self):
-        pass
-    
+        if self.proc != None:
+            try: self.log("Shutting down server")
+            except: pass
+            
+            self.proc.kill()
+            self.proc = None
+        else:
+            try: self.log("Server is already down")
+            except: pass

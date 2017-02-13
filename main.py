@@ -5,7 +5,7 @@ def hello(): print("Hello")
     
 class Application(tk.Frame):
     def __init__(self, master=None):
-        super().__init__(master)
+        tk.Frame.__init__(self, master)
         self.pack()
         #
         self.text_box = None
@@ -14,7 +14,7 @@ class Application(tk.Frame):
         self.common = Common(self.logger)
         self.create_widgets()
         self.welcome()
-
+        
     def welcome(self):
         '''This utility aims to help people to use JADE on their desktops
         using a local webserver.  It can find the JADE data in users' browser
@@ -56,6 +56,10 @@ class Application(tk.Frame):
         jademenu.add_command(label="start JADE webserver",
                              command=self.common.start_server)
 
+        jademenu.add_command(label="stop JADE webserver",
+                             command=self.common.stop_server)
+
+        
         infomenu = tk.Menu(menubar, tearoff=0)
         infomenu.add_command(label="show JADE paths", command=self.common.show_paths)
         infomenu.add_command(label="thank staff", command=self.thank_staff)
@@ -70,6 +74,9 @@ class Application(tk.Frame):
     def config_text_box(self):
         self.text_box = tk.Text(self.master)
         self.text_box.pack(side="top", fill=tk.BOTH, expand=1)
+
+    def cleanup(self):
+        self.common.cleanup()
         
     def thank_staff(self):
         msg = [ " _   _                 _              _         __  __ _ ",
@@ -85,3 +92,4 @@ class Application(tk.Frame):
 root = tk.Tk()
 app = Application(master=root)
 app.mainloop()
+app.common.cleanup()

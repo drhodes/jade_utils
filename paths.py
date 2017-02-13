@@ -13,3 +13,4 @@ JADE_EXPORTS = sub_path("exports")
 JADE_BACKUPS = sub_path("backups")
 
 JADE_SERVER_MODULE = sub_path("jade_master/jade-master/server.py")
+JADE_SERVER_DIR = sub_path("jade_master/jade-master")

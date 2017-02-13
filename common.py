@@ -1,17 +1,19 @@
 import os
-import urllib.request as ur
+import urllib2 as ur
 import zipfile
 import shutil
 import threading
 import paths as PATH
 import server_mgr
 
-
 class Common(object):
     def __init__(self, logging_function):
         self.log = logging_function
         self.server_mgr = server_mgr.ServerMgr(logging_function)
         self.download_busy = False
+
+    def cleanup(self):
+        self.server_mgr.stop_server()
         
     def show_paths(self):
         self.log("+------------------------------------------------------")
@@ -57,12 +59,17 @@ class Common(object):
         self.log("saving done.")
 
     def start_server(self):
+        os.chdir(PATH.JADE_SERVER_DIR)
         if self.download_busy:
             self.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
             self.log("Jade is busy downloading environment, please wait.") 
             self.log("")
         else:             
             self.server_mgr.start_server()
+
+    def stop_server(self):
+        self.server_mgr.stop_server()
+
             
     def remove_old_jade(self):
         # if old jade is

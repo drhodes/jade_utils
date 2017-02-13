@@ -1,0 +1,9 @@
+* issue 
+ - page won't load because relative paths are wrong, subprocess needs to
+  set cwd to JADE_MASTER or something.
+
+* feature
+- (safely!) merge changes back into edx local storage.
+  - this need to be thought out very carefully.
+  - start by refusing to merge from an old file to a newer one.
+  - 
