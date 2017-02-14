@@ -1,4 +1,8 @@
 * issue 
+** open
+- need to get last modified dates of local storage files.
+
+** closed
  - page won't load because relative paths are wrong, subprocess needs to
   set cwd to JADE_MASTER or something.
 
@@ -7,3 +11,6 @@
   - this need to be thought out very carefully.
   - start by refusing to merge from an old file to a newer one.
   - 
+- Backups clipboard 
+- Diff jade modules?  Can we produce a sensible diff?
+
